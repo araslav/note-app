@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+</head>
+<body>
+<div style="margin-top: 10px;"><a style="color:red;font-size:16px" href="/notes/add">Add note</a></div>
+<div style="margin-top: 10px;"><a style="color:red;font-size:16px" href="/notes">Notes</a></div>
+<section style="margin: 30px 0;">
+    <div style="margin-bottom: 10px;">Edite User</div>
+    <form th:action="@{/user/edite}" th:object="${user}" method="post">
+            <label>Email: <input type="email" th:field="*{email}" th:value="${user.email}"></label>
+            <label>Name: <input type="text" th:field="*{name}" th:value="${user.name}"></label>
+            <label>Password: <input type="password" name="password"></label>
+            <label>RePassword: <input type="password" name="repeatPassword"></label>
+        <div style="margin-top: 10px;"><input type="submit" value="Edite"/></div>
+    </form>
+</section>
+<section>
+    <div th:each="noteList : ${noteList}">
+        <form  th:action="@{/notes/edite/{id}(id=${noteList.id})}" th:object="${noteList}" method="post" >
+            <div style="width: 600px; border: 1px solid beige;">
+                <input type="text" name="text" th:value="${noteList.text}"/>
+            </div>
+            <div style="margin: 10px 0 10px 0;"><input type="submit" value="Edite"/></div>
+        </form>
+        <form th:action="@{/notes/delete/{id}(id=${noteList.id})}"
+              th:object="${noteList}" method="post">
+            <div><input type="submit" value="Delete"/></div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

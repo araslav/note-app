@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+</head>
+<body>
+    <h1>Notes!</h1>
+    <div><a style="color:red;font-size:16px" href="/notes?sortOrder=asc">Sorting by date asc</a></div>
+    <div style="margin-top: 10px;"><a style="color:red;font-size:16px" href="/notes?sortOrder=desc">Sorting by date desc</a></div>
+    <div style="margin-top: 10px;"><a style="color:red;font-size:16px" href="/notes/add">Add note</a></div>
+    <div style="margin-top: 10px;"><a style="color:red;font-size:16px" href="/user">User</a></div>
+    <br>
+    <section th:each="noteList : ${noteList}">
+        <div style="width: 600px; border: 1px solid beige;">
+            <p th:text="${noteList.getText()}"></p>
+            <ul>
+                <li th:each="likeList : ${noteList.getLike()}">Like</li>
+            </ul>
+
+            <form th:if= "${noteList.isLiked()}" th:action="@{/notes/deleteLike/{id}(id=${noteList.id})}"
+                  th:object="${likeModel}" method="post">
+                <div><input type="submit" value="Delete Like"/></div>
+            </form>
+
+            <form th:unless= "${noteList.isLiked()}" th:action="@{/notes/addLike/{id}(id=${noteList.id})}"
+                  th:object="${likeModel}" method="post">
+                <div><input type="submit" value="Like"/></div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

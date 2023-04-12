@@ -1,4 +1,10 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/currencyParser
+      uri: mongodb://localhost:27017/NoteDd
+  thymeleaf:
+    mode: HTML
+    cache: false
+    encoding: UTF-8
+    servlet:
+      content-type: text/html; charset=UTF-8

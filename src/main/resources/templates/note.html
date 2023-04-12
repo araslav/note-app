@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Note</title>
+</head>
+<body>
+<form th:action="@{/notes/add}" th:object="${noteRequest}" method="post">
+  <div>
+      <label> Note tex : <textarea th:field="*{text}"/></textarea> </label>
+  </div>
+  <div><input type="submit" value="Add"/></div>
+</form>
+</body>
+</html>
